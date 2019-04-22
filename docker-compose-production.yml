@@ -4,12 +4,16 @@ services:
     image: postgres:9.6
     ports:
       - 5440:5432
+    volues:
+      - pg-data:/var/lib/postgresql/data
     env_file:
       - .env
   redis:
     image: redis
     ports:
       - 6381:6379
+    volues:
+      - redis-data:/data
   rails:
     build: .
     image: ma-rails
@@ -29,3 +33,9 @@ services:
       - rails
     env_file:
       - .env
+
+volumes:
+  pg-data:
+    driver: local
+  redis-data:
+    driver: local
