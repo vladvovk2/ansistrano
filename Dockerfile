@@ -1,4 +1,4 @@
-FROM ruby:2.4.2
+FROM ruby:2.6.1
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 RUN apt-get update && apt-get -y install curl git nano
 

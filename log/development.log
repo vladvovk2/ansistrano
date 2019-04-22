@@ -1,0 +1,1 @@
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from env_config at /home/vladvovk2/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/railties-5.1.5/lib/rails/application.rb:247)
