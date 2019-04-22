@@ -1,0 +1,50 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6
+    ports:
+      - 5440:5432
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  redis:
+    image: redis
+    ports:
+      - 6381:6379
+    volumes:
+      - redis-data:/data
+  rails:
+    build: .
+    command: sh -c 'cd /app/ma && bundle install && rails s -b 0.0.0.0'
+    stdin_open: true
+    depends_on:
+      - db
+      - redis
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app/ma
+      - ma-gems:/usr/local/bundle
+    tty: true
+    env_file:
+      - .env
+  sidekiq:
+    build: .
+    command: sh -c 'cd /app/ma && sidekiq'
+    stdin_open: true
+    depends_on:
+      - redis
+    volumes:
+      - .:/app/ma
+      - ma-gems:/usr/local/bundle
+    tty: true
+    env_file:
+      - .env
+volumes:
+  ma-gems:
+    driver: local
+  db-data:
+    driver: local
+  redis-data:
+    driver: local
