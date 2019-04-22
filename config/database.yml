@@ -1,5 +1,5 @@
 defaults: &defaults
-  adapter: postgresql
+  adapter: <%= ENV['DB_ADAPTER'] %>
   host: <%= ENV['POSTGRES_HOST'] %>
   port: <%= ENV['POSTGRES_PORT'] %>
   database: <%= ENV['POSTGRES_DATABASE'] %>
